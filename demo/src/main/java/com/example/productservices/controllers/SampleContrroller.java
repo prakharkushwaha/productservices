@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sample")
 public class SampleContrroller {
-    @GetMapping("/hello/{name}")
-    public String SayHello(@PathVariable("name") String name){
-        return "hello" + name;
+    @GetMapping("/hello/{name}/{number}")
+    public String SayHello(@PathVariable("name") String name,@PathVariable("number") int numberTimes){
+        String response = "";
+        for(int i = 0;i<numberTimes;i++){
+            String s = "hello" + name + "<br>";
+            response += s;
+        }
+
+        return response;
     }
 
 }
