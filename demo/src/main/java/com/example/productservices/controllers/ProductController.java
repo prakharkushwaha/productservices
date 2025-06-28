@@ -2,6 +2,9 @@ package com.example.productservices.controllers;
 
 import com.example.productservices.models.Product;
 import com.example.productservices.services.productService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,14 +19,14 @@ public class ProductController {
       this.productservice=productservice;
    }
  @GetMapping("{id}")
-    public Product getSingleProduct(@PathVariable("id") Long productId ){
-
-     return productservice.getSingleProduct(productId);
+    public ResponseEntity<Product>  getSingleProduct(@PathVariable("id") Long productId ){
+//here we use ResponseEntity for representing complete http response with status code
+     return new ResponseEntity<>(productservice.getSingleProduct(productId), HttpStatus.OK);
 
     }
     @GetMapping()
     public List<Product> getAllProduct(){
-        return  new ArrayList<>();
+        return  productservice.getAllProduct();
     }
     @PostMapping
     public Product createProduct( @RequestBody Product product){
