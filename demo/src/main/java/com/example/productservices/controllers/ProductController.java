@@ -1,5 +1,6 @@
 package com.example.productservices.controllers;
 
+import com.example.productservices.exceptions.ProductNotFoundException;
 import com.example.productservices.models.Product;
 import com.example.productservices.services.productService;
 import org.springframework.http.HttpStatus;
@@ -19,11 +20,11 @@ public class ProductController {
       this.productservice=productservice;
    }
  @GetMapping("{id}")
-    public ResponseEntity<Product>  getSingleProduct(@PathVariable("id") Long productId ){
+    public Product getSingleProduct(@PathVariable("id") Long productId )throws ProductNotFoundException {
 //here we use ResponseEntity for representing complete http response with status code
-     return new ResponseEntity<>(productservice.getSingleProduct(productId), HttpStatus.OK);
 
-    }
+    return productservice.getSingleProduct(productId);
+ }
     @GetMapping()
     public List<Product> getAllProduct(){
         return  productservice.getAllProduct();

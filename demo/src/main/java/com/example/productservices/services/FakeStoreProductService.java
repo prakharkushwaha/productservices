@@ -1,6 +1,7 @@
 package com.example.productservices.services;
 
 import com.example.productservices.dtos.FakeStoreProductDto;
+import com.example.productservices.exceptions.ProductNotFoundException;
 import com.example.productservices.models.Category;
 import com.example.productservices.models.Product;
 import lombok.Getter;
@@ -23,12 +24,14 @@ public class FakeStoreProductService implements productService {
     @Override
     public Product getSingleProduct(Long productId) {
 //        RestTemplate restTemplate = new RestTemplate();
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
-                "https://fakestoreapi.com/products/" + productId,
-                FakeStoreProductDto.class
-        );
 
-        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
+        throw new ProductNotFoundException(productId);
+//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
+//                "https://fakestoreapi.com/products/" + productId,
+//                FakeStoreProductDto.class
+//        );
+//
+//        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
