@@ -25,13 +25,13 @@ public class FakeStoreProductService implements productService {
     public Product getSingleProduct(Long productId) {
 //        RestTemplate restTemplate = new RestTemplate();
 
-        throw new ProductNotFoundException(productId);
-//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
-//                "https://fakestoreapi.com/products/" + productId,
-//                FakeStoreProductDto.class
-//        );
-//
-//        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
+//        throw new ProductNotFoundException(productId); -- use this to throw exception if product not found
+        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
+                "https://fakestoreapi.com/products/" + productId,
+                FakeStoreProductDto.class
+        );
+
+        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
