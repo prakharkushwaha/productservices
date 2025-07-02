@@ -55,7 +55,7 @@ public class FakeStoreProductService implements productService {
     }
 
     @Override
-    public void deleteProduct(Long productId, Product product) {
+    public void deleteProduct(Long productId) {
 
     }
 

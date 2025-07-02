@@ -10,7 +10,7 @@ public interface productService {
 
     Product createProduct( Product product);
 
-    void deleteProduct( Long productId ,Product product);
+    void deleteProduct( Long productId);
 
     void replaceProduct( Long productId,Product product);
 }
