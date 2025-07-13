@@ -1,7 +1,10 @@
 package com.example.productservices.repositories;
 
 import com.example.productservices.models.Product;
+import com.example.productservices.repositories.projections.ProductWithTitleAndPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.yaml.snakeyaml.tokens.Token;
 
 import java.util.List;
@@ -24,4 +27,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Override
     Product save(Product product);
+
+    @Query(" SELECT  p.title AS title, p.price AS price  FROM products p WHERE p.id = :id")
+
+    ProductWithTitleAndPrice getTitleAndPricesById(@Param("id") Long productId);
+//    @Query("SELECT p.title AS title, p.price AS price FROM products p WHERE p.id = :id") specifies a JPQL query to fetch only the title and price fields from the products table where the product's id matches the given parameter.
+//    ProductWithTitleAndPrice getTitleAndPricesById(@Param("id") Long productId); declares a method that executes the above query, returning a projection (ProductWithTitleAndPrice) containing only the title and price for the specified product ID.
+//    This approach is used to fetch partial data (not the entire entity) efficiently.
 }
+
